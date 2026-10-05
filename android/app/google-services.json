@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "371919968074",
+    "project_id": "returnstarlink",
+    "storage_bucket": "returnstarlink.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371919968074:android:a84ef9cef6b3e6276dd3b3",
+        "android_client_info": {
+          "package_name": "com.returntranslink.return_translink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdErY3o126SpZX3otFgbPJn2TkyQOt3nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
