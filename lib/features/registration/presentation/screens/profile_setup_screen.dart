@@ -30,7 +30,7 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
   Uint8List? _imageBytes;
   XFile? _profileImage;
 
-  final List<String> _cities = ['Ahmedabad', 'Surat', 'Rajkot', 'Vadodara'];
+  final List<String> _cities = ['Ahmedabad', 'Surat', 'Rajkot', 'Vadodara', 'Mumbai', 'Pune', 'Delhi', 'Jaipur', 'Indore', 'Nagpur', 'Bhopal', 'Hyderabad', 'Bangalore', 'Chennai', 'Kolkata', 'Lucknow', 'Kanpur', 'Patna', 'Ludhiana', 'Agra'];
   final List<String> _vehicleTypes = ['Truck', 'Tempo', 'Trailer', 'Pickup'];
 
   @override
@@ -70,7 +70,7 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
     final email = _emailController.text.trim();
     final phone = _phoneController.text.trim();
 
-    if (name.isEmpty || email.isEmpty || phone.isEmpty || _selectedGender == null || _selectedCity == null || _selectedVehicleType == null) {
+    if (name.isEmpty || email.isEmpty || phone.isEmpty || _selectedCity == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fill all the details')),
       );
@@ -87,7 +87,6 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
       final uid = user.id;
       
       String? imageUrl;
-      // Upload image to Supabase Storage if picked
       if (_profileImage != null && _imageBytes != null) {
         try {
           final fileExt = _profileImage!.path.split('.').last;
@@ -104,17 +103,60 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
         }
       }
       
-      // Update the profile in partners table
-      await Supabase.instance.client.from('partners').update({
-        'full_name': name,
-        'email': email,
-        'gender': _selectedGender,
-        'city': _selectedCity,
-        if (imageUrl != null) 'profile_photo_url': imageUrl,
-      }).eq('auth_id', uid);
+      // Check if profile exists
+      final existingProfile = await Supabase.instance.client.from('profiles').select().eq('auth_user_id', uid).maybeSingle();
+      
+      Map<String, dynamic> profileResp;
+      
+      if (existingProfile == null) {
+        // Insert new profile
+        profileResp = await Supabase.instance.client.from('profiles').insert({
+          'auth_user_id': uid,
+          'role': 'partner',
+          'full_name': name,
+          'mobile_number': phone,
+          'email': email,
+          'city': _selectedCity,
+          if (imageUrl != null) 'profile_photo_url': imageUrl,
+        }).select().single();
+      } else {
+        // Update existing profile
+        profileResp = await Supabase.instance.client.from('profiles').update({
+          'role': 'partner',
+          'full_name': name,
+          'mobile_number': phone,
+          'email': email,
+          'city': _selectedCity,
+          if (imageUrl != null) 'profile_photo_url': imageUrl,
+        }).eq('auth_user_id', uid).select().single();
+      }
+
+      // Check if partner exists
+      final existingPartner = await Supabase.instance.client.from('partners').select().eq('profile_id', profileResp['id']).maybeSingle();
+      
+      if (existingPartner == null) {
+        await Supabase.instance.client.from('partners').insert({
+          'profile_id': profileResp['id'],
+          'owner_name': name,
+          'mobile_number': phone,
+          'email': email,
+          'city': _selectedCity,
+          'partner_type': 'individual_owner',
+          if (imageUrl != null) 'profile_photo_url': imageUrl,
+        });
+      } else {
+        await Supabase.instance.client.from('partners').update({
+          'owner_name': name,
+          'mobile_number': phone,
+          'email': email,
+          'city': _selectedCity,
+          'partner_type': 'individual_owner',
+          if (imageUrl != null) 'profile_photo_url': imageUrl,
+        }).eq('profile_id', profileResp['id']);
+      }
       
       if (mounted) {
-        context.push('/add_vehicle');
+        context.go('/add_vehicle');
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -307,48 +349,6 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
                       ),
                       
                       const SizedBox(height: 24),
-
-                      // Gender
-                      const Text(
-                        'Gender',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFF0A1128)),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () => setState(() => _selectedGender = 'Male'),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
-                                decoration: BoxDecoration(
-                                  color: _selectedGender == 'Male' ? const Color(0xFFFFC107) : Colors.white,
-                                  border: Border.all(color: _selectedGender == 'Male' ? const Color(0xFFFFC107) : Colors.grey.shade300),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(child: Text('Male', style: TextStyle(fontWeight: FontWeight.bold, color: _selectedGender == 'Male' ? Colors.black : Colors.black54))),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () => setState(() => _selectedGender = 'Female'),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
-                                decoration: BoxDecoration(
-                                  color: _selectedGender == 'Female' ? const Color(0xFFFFC107) : Colors.white,
-                                  border: Border.all(color: _selectedGender == 'Female' ? const Color(0xFFFFC107) : Colors.grey.shade300),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(child: Text('Female', style: TextStyle(fontWeight: FontWeight.bold, color: _selectedGender == 'Female' ? Colors.black : Colors.black54))),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      
-                      const SizedBox(height: 24),
                       
                       // City
                       const Text(
@@ -376,41 +376,6 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
                             onChanged: (value) {
                               setState(() {
                                 _selectedCity = value;
-                              });
-                            },
-                            icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF6B7280), size: 20),
-                          ),
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 24),
-                      
-                      // Vehicle Type
-                      const Text(
-                        'Vehicle Type',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFF0A1128)),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: _selectedVehicleType,
-                            isExpanded: true,
-                            hint: const Text('Select Vehicle Type', style: TextStyle(color: Colors.black38, fontSize: 14)),
-                            items: _vehicleTypes.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedVehicleType = value;
                               });
                             },
                             icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF6B7280), size: 20),

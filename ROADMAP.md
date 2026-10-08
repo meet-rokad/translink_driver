@@ -4,8 +4,8 @@ This document tracks pending features, known bugs/architectural issues, and futu
 
 ## 🔴 High Priority / Bugs (Immediate Action Required)
 
-- [ ] **Auth Architecture Sync**: Currently using Firebase for OTP/Login and Supabase for the database. This dual setup is prone to token mismatch and security risks. 
-      **Fix:** Migrate OTP and Login entirely to Supabase Auth.
+- [x] **Auth Architecture Sync**: Currently using Firebase for OTP/Login and Supabase for the database. This dual setup is prone to token mismatch and security risks. 
+      **Fix:** Migrate OTP and Login entirely to Supabase Auth. (Completed)
 - [ ] **Return Trip Flow (UI/UX)**: Change the toggle in the "Add Return Trip" screen to a YES/NO button format.
       - If **YES**: Create the return trip.
       - If **NO**: Prompt the user to update their current location.

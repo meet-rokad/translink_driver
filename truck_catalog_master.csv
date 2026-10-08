@@ -1,0 +1,101 @@
+brand,model_name,truck_type,body_type,capacity_kg,capacity_tons,length_ft,width_ft,height_ft,fuel_type
+Tata Motors,Tata Ace Gold Petrol,mini_truck,Open Body,710,0.71,7.2,4.9,4.5,petrol
+Tata Motors,Tata Ace Gold Diesel Plus,mini_truck,Open Body,750,0.75,7.2,4.9,4.5,diesel
+Tata Motors,Tata Ace Gold CNG,mini_truck,Open Body,640,0.64,7.2,4.9,4.5,cng
+Tata Motors,Tata Ace EV,mini_truck,Closed Container,600,0.6,7.2,4.9,5.0,electric
+Tata Motors,Tata Intra V10,mini_truck,Open Body,1000,1.0,8.2,5.3,5.0,diesel
+Tata Motors,Tata Intra V20 Bi-Fuel,mini_truck,Open Body,1000,1.0,8.8,5.3,5.0,cng
+Mahindra,Mahindra Jeeto Plus Petrol,mini_truck,Open Body,715,0.71,6.5,4.6,4.5,petrol
+Mahindra,Mahindra Jeeto Plus Diesel,mini_truck,Open Body,715,0.71,6.5,4.6,4.5,diesel
+Mahindra,Mahindra Jeeto Plus CNG,mini_truck,Open Body,650,0.65,6.5,4.6,4.5,cng
+Mahindra,Mahindra Supro Profit Truck Mini,mini_truck,Open Body,900,0.9,7.5,5.0,4.8,diesel
+Mahindra,Mahindra Supro Profit Truck Maxi,mini_truck,Open Body,1050,1.05,8.2,5.1,5.0,diesel
+Maruti Suzuki,Super Carry Petrol,mini_truck,Open Body,740,0.74,7.2,4.9,4.5,petrol
+Maruti Suzuki,Super Carry CNG,mini_truck,Open Body,625,0.62,7.2,4.9,4.5,cng
+Mahindra,Bolero Pik-Up Extra Strong 1.3T,pickup,Open Body,1300,1.3,8.2,5.6,5.5,diesel
+Mahindra,Bolero Pik-Up Extra Long 1.7T,pickup,Open Body,1700,1.7,9.0,5.6,5.5,diesel
+Mahindra,Bolero Maxi Truck Plus,pickup,Open Body,1200,1.2,8.2,5.5,5.5,diesel
+Mahindra,Bolero Pik-Up CNG,pickup,Open Body,1190,1.19,8.5,5.6,5.5,cng
+Mahindra,Bolero Camper 4x4,pickup,Double Cab Open,1000,1.0,5.5,5.5,5.0,diesel
+Tata Motors,Tata Intra V30,pickup,Open Body,1300,1.3,8.8,5.3,5.2,diesel
+Tata Motors,Tata Intra V50,pickup,Open Body,1500,1.5,9.8,5.3,5.5,diesel
+Tata Motors,Tata Yodha 2.0,pickup,Open Body,2000,2.0,8.7,6.1,5.5,diesel
+Tata Motors,Tata Yodha 1700,pickup,Open Body,1700,1.7,8.7,6.1,5.5,diesel
+Ashok Leyland,Bada Dost i1,pickup,Open Body,1250,1.25,8.5,5.8,5.5,diesel
+Ashok Leyland,Bada Dost i2,pickup,Open Body,1425,1.42,9.0,5.8,5.5,diesel
+Ashok Leyland,Bada Dost i3 Plus,pickup,Open Body,1400,1.4,9.8,5.8,5.5,diesel
+Ashok Leyland,Bada Dost i4,pickup,Open Body,1860,1.86,9.8,5.8,5.5,diesel
+Ashok Leyland,Dost Strong,pickup,Open Body,1250,1.25,8.2,5.3,5.2,diesel
+Ashok Leyland,Dost Plus,pickup,Open Body,1500,1.5,8.7,5.4,5.5,diesel
+Isuzu,Isuzu D-MAX Single Cab,pickup,Open Body,1240,1.24,8.0,5.5,5.2,diesel
+Tata Motors,Tata 407 Gold SFC 29 WB,tata_407,Open Body,2500,2.5,10.0,6.5,6.5,diesel
+Tata Motors,Tata 407 Gold SFC 33 WB,tata_407,Container,2800,2.8,12.0,6.5,7.0,diesel
+Tata Motors,Tata 407 Gold SFC CNG,tata_407,Open Body,2400,2.4,10.0,6.5,6.5,cng
+Tata Motors,Tata 510 SFC TT,14_ft,Open Body,3000,3.0,12.5,6.5,7.0,diesel
+Tata Motors,Tata 610 SFC,14_ft,High Deck,3500,3.5,14.0,6.8,7.0,diesel
+Tata Motors,Tata 709g LPT,14_ft,Container,4200,4.2,14.0,6.8,7.0,cng
+Tata Motors,Tata 710 LPT,14_ft,Open Body,4500,4.5,14.0,7.0,7.0,diesel
+Eicher,Eicher Pro 2049,14_ft,Container,3500,3.5,10.5,6.6,7.0,diesel
+Eicher,Eicher Pro 2055,14_ft,Open Body,4000,4.0,12.2,6.6,7.0,diesel
+Eicher,Eicher Pro 2059,14_ft,Container,4500,4.5,14.2,6.6,7.2,diesel
+Ashok Leyland,Partner 4 Tyre,14_ft,Container,3750,3.75,11.2,6.6,7.0,diesel
+Ashok Leyland,Partner 6 Tyre,14_ft,Container,4500,4.5,14.0,6.8,7.2,diesel
+SML Isuzu,SML Sartaj GS 5252,14_ft,Open Body,3200,3.2,12.0,6.5,7.0,diesel
+SML Isuzu,SML Sartaj GS HG 72,14_ft,High Deck,4000,4.0,14.0,6.8,7.2,diesel
+Force Motors,Force Shaktiman 400,14_ft,Open Body,3000,3.0,12.0,6.5,6.5,diesel
+Tata Motors,Tata Ultra T.7,17_ft,Container,4800,4.8,14.2,7.2,7.5,diesel
+Tata Motors,Tata Ultra T.9,17_ft,Container,6000,6.0,17.2,7.2,7.5,diesel
+Tata Motors,Tata 1109g LPT,19_ft,Container,7500,7.5,17.5,7.2,7.5,cng
+Tata Motors,Tata 1212 LPT,19_ft,High Deck,8000,8.0,19.5,7.2,8.0,diesel
+Tata Motors,Tata 1412 LPT,19_ft,Container,9500,9.5,20.0,7.3,8.0,diesel
+Tata Motors,Tata Ultra T.12,19_ft,Closed Container,8500,8.5,20.0,7.3,8.0,diesel
+Eicher,Eicher Pro 2059XP,17_ft,Container,5500,5.5,16.2,7.0,7.5,diesel
+Eicher,Eicher Pro 2080XP,17_ft,Container,6500,6.5,17.2,7.0,7.5,diesel
+Eicher,Eicher Pro 2095XP,19_ft,Container,7500,7.5,19.2,7.2,8.0,diesel
+Eicher,Eicher Pro 2110,19_ft,Container,8500,8.5,20.0,7.2,8.0,diesel
+Eicher,Eicher Pro 2114XP,19_ft,High Deck Container,10000,10.0,22.0,7.3,8.2,diesel
+Ashok Leyland,Boss 1115 HB,17_ft,Container,7500,7.5,17.0,7.2,7.8,diesel
+Ashok Leyland,Boss 1215 HB,19_ft,Container,8500,8.5,19.0,7.2,8.0,diesel
+Ashok Leyland,Boss 1315 HB,19_ft,Container,9500,9.5,20.0,7.3,8.2,diesel
+Ashok Leyland,Boss 1415 HB,19_ft,Container,10000,10.0,22.0,7.4,8.5,diesel
+BharatBenz,BharatBenz 1015R,17_ft,Container,6500,6.5,17.0,7.2,7.5,diesel
+BharatBenz,BharatBenz 1215R,19_ft,Container,8000,8.0,19.0,7.2,8.0,diesel
+BharatBenz,BharatBenz 1415R,19_ft,Container,9500,9.5,20.0,7.3,8.0,diesel
+SML Isuzu,SML Prestige GS,17_ft,Open Body,6000,6.0,17.0,7.0,7.5,diesel
+SML Isuzu,SML Samrat GS,19_ft,Open Body,7500,7.5,19.0,7.2,8.0,diesel
+Tata Motors,Tata 1512 LPT,22_ft,Open Body,11000,11.0,22.0,7.5,8.0,diesel
+Tata Motors,Tata Ultra T.16,22_ft,Container,11500,11.5,22.0,7.5,8.0,diesel
+Tata Motors,Tata Ultra T.19,22_ft,Container,13000,13.0,24.0,7.5,8.5,diesel
+Tata Motors,Tata Signa 1923.K,22_ft,Tipper,13500,13.5,20.0,7.8,8.0,diesel
+Tata Motors,Tata Signa 2823.K,32_ft,Multi-Axle Open,18500,18.5,28.0,8.0,8.5,diesel
+Tata Motors,Tata Signa 2825.K,32_ft,Multi-Axle Open,19000,19.0,30.0,8.0,8.5,diesel
+Tata Motors,Tata Signa 3523.TK,32_ft,Multi-Axle Open,25000,25.0,32.0,8.2,9.0,diesel
+Tata Motors,Tata Signa 4225.TK,32_ft,5-Axle Heavy Open,31000,31.0,32.0,8.2,9.0,diesel
+Tata Motors,Tata Signa 4825.TK,32_ft,5-Axle Heavy Open,35000,35.0,32.0,8.2,9.0,diesel
+Eicher,Eicher Pro 3015,22_ft,Container,11000,11.0,22.0,7.5,8.5,diesel
+Eicher,Eicher Pro 3019,22_ft,Container,13500,13.5,24.0,7.5,8.5,diesel
+Eicher,Eicher Pro 6028,32_ft,Multi-Axle Open,20000,20.0,30.0,8.0,8.5,diesel
+Eicher,Eicher Pro 6035,32_ft,32ft HQ Container,24000,24.0,32.0,8.2,9.5,diesel
+Eicher,Eicher Pro 6042,32_ft,5-Axle Multi-Axle,30000,30.0,32.0,8.2,9.0,diesel
+Ashok Leyland,Boss 1920,22_ft,Container,13000,13.0,24.0,7.5,8.5,diesel
+Ashok Leyland,AVTR 1920,22_ft,Open Body,13500,13.5,24.0,7.8,8.5,diesel
+Ashok Leyland,AVTR 2820,32_ft,Multi-Axle Open,20000,20.0,28.0,8.0,8.5,diesel
+Ashok Leyland,AVTR 3520 32ft HQ,32_ft,Closed Container HQ,24000,24.0,32.0,8.2,9.5,diesel
+Ashok Leyland,AVTR 4220,32_ft,Multi-Axle Haulage,31000,31.0,32.0,8.2,9.0,diesel
+Ashok Leyland,AVTR 4825,32_ft,5-Axle Heavy Haulage,36000,36.0,32.0,8.2,9.0,diesel
+BharatBenz,BharatBenz 1617R,22_ft,Container,11500,11.5,22.0,7.5,8.0,diesel
+BharatBenz,BharatBenz 1917R,22_ft,Container,13000,13.0,24.0,7.5,8.5,diesel
+BharatBenz,BharatBenz 2823R,32_ft,Multi-Axle Open,20000,20.0,28.0,8.0,8.5,diesel
+BharatBenz,BharatBenz 3523R,32_ft,32ft Container,25000,25.0,32.0,8.2,9.5,diesel
+BharatBenz,BharatBenz 4228R,32_ft,Multi-Axle Haulage,31000,31.0,32.0,8.2,9.0,diesel
+Tata Motors,Tata Signa 4018.S,trailer,40ft Flatbed Trailer,30000,30.0,40.0,8.5,8.5,diesel
+Tata Motors,Tata Signa 4625.S,trailer,40ft Container Trailer,35000,35.0,40.0,8.5,9.5,diesel
+Tata Motors,Tata Signa 5530.S,trailer,Heavy Lowbed Trailer,42000,42.0,40.0,8.5,8.5,diesel
+Ashok Leyland,AVTR 4020 Tractor,trailer,Flatbed Trailer,30000,30.0,40.0,8.5,8.5,diesel
+Ashok Leyland,AVTR 4620 Tractor,trailer,40ft Container Trailer,35000,35.0,40.0,8.5,9.5,diesel
+Ashok Leyland,AVTR 5525 Tractor,trailer,Heavy Lowbed Trailer,42000,42.0,40.0,8.5,8.5,diesel
+Eicher,Eicher Pro 6046,trailer,40ft Trailer,35000,35.0,40.0,8.5,9.0,diesel
+Eicher,Eicher Pro 6055,trailer,Heavy Puller Trailer,42000,42.0,40.0,8.5,8.5,diesel
+BharatBenz,BharatBenz 4028T,trailer,40ft Container Trailer,30000,30.0,40.0,8.5,9.0,diesel
+BharatBenz,BharatBenz 5528T,trailer,Heavy Trailer Puller,42000,42.0,40.0,8.5,8.5,diesel
+Volvo,Volvo FH 520 Puller,trailer,ODC Heavy Puller,50000,50.0,45.0,8.5,9.5,diesel

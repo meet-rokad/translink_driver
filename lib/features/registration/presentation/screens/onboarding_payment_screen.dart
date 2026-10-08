@@ -103,7 +103,13 @@ class OnboardingPaymentScreen extends StatelessWidget {
                         try {
                           final user = Supabase.instance.client.auth.currentUser;
                           if (user != null) {
-                            await Supabase.instance.client.from('partners').update({'status': 'ACTIVE'}).eq('auth_id', user.id);
+                            final profile = await Supabase.instance.client.from('profiles').select('id').eq('auth_user_id', user.id).maybeSingle();
+                            if (profile != null) {
+                              await Supabase.instance.client.from('partners').update({
+                                'onboarding_status': 'completed',
+                                'is_active': true,
+                              }).eq('profile_id', profile['id']);
+                            }
                           }
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -125,7 +131,13 @@ class OnboardingPaymentScreen extends StatelessWidget {
                           try {
                             final user = Supabase.instance.client.auth.currentUser;
                             if (user != null) {
-                              await Supabase.instance.client.from('partners').update({'status': 'ACTIVE'}).eq('auth_id', user.id);
+                              final profile = await Supabase.instance.client.from('profiles').select('id').eq('auth_user_id', user.id).maybeSingle();
+                              if (profile != null) {
+                                await Supabase.instance.client.from('partners').update({
+                                  'onboarding_status': 'completed',
+                                  'is_active': true,
+                                }).eq('profile_id', profile['id']);
+                              }
                             }
                             if (context.mounted) context.go('/dashboard');
                           } catch (e) {

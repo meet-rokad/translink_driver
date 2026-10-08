@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pinput/pinput.dart';
 
+import '../../../../core/helpers/onboarding_helper.dart';
 import '../../../../shared/widgets/primary_button.dart';
 import '../providers/auth_provider.dart';
 
@@ -16,9 +18,8 @@ class OtpScreen extends ConsumerStatefulWidget {
 }
 
 class _OtpScreenState extends ConsumerState<OtpScreen> {
-  final List<TextEditingController> _controllers =
-      List.generate(6, (_) => TextEditingController());
-  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+  final TextEditingController _pinController = TextEditingController();
+  final FocusNode _pinFocusNode = FocusNode();
 
   Timer? _resendTimer;
   int _resendSeconds = 60;
@@ -33,8 +34,8 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   @override
   void dispose() {
     _resendTimer?.cancel();
-    for (var c in _controllers) c.dispose();
-    for (var n in _focusNodes) n.dispose();
+    _pinController.dispose();
+    _pinFocusNode.dispose();
     super.dispose();
   }
 
@@ -58,7 +59,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   }
 
   void _verifyOtp() {
-    final otp = _controllers.map((c) => c.text).join();
+    final otp = _pinController.text;
     if (otp.isEmpty || otp.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter a valid 6-digit OTP')),
@@ -72,20 +73,20 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
       onSuccess: (String authId, String phoneNumber) async {
         if (!mounted) return;
         
-        final partner = await ref.read(partnerSyncProvider).findOrCreatePartner(
+        // Create profile/partner record if new user
+        await ref.read(partnerSyncProvider).findOrCreatePartner(
           authId: authId,
           mobileNumber: phoneNumber,
         );
         
         if (!mounted) return;
         
-        if (partner != null && partner['status'] == 'NEW') {
-          context.go('/profile_setup'); // Bypass role selection, go directly to profile setup
-        } else {
-          context.go('/dashboard'); // Go to dashboard for existing users
-        }
+        // Use OnboardingHelper to check all 3 steps
+        final route = await OnboardingHelper.getOnboardingRoute();
+        if (mounted) context.go(route);
       },
       onError: (message) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(message),
@@ -98,7 +99,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   }
 
   void _navigateByStatus(String status) {
-    context.go('/dashboard');
+    if (status == 'NEW') {
+      context.go('/profile_setup');
+    } else {
+      context.go('/dashboard');
+    }
   }
 
   void _resendOtp() {
@@ -158,49 +163,36 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
               const SizedBox(height: 32),
 
               // OTP Fields
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(6, (i) {
-                  return SizedBox(
+              Center(
+                child: Pinput(
+                  length: 6,
+                  controller: _pinController,
+                  focusNode: _pinFocusNode,
+                  autofillHints: const [AutofillHints.oneTimeCode],
+                  defaultPinTheme: PinTheme(
                     width: 48,
                     height: 56,
-                    child: TextField(
-                      controller: _controllers[i],
-                      focusNode: _focusNodes[i],
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF0A1128)),
-                      decoration: InputDecoration(
-                        counterText: '',
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFFFFC107), width: 2),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(color: Color(0xFFFFC107), width: 2),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        if (value.isNotEmpty && i < 5) {
-                          _focusNodes[i + 1].requestFocus();
-                        } else if (value.isEmpty && i > 0) {
-                          _focusNodes[i - 1].requestFocus();
-                        }
-                        // Auto verify when all 6 digits entered
-                        final otp = _controllers.map((c) => c.text).join();
-                        if (otp.length == 6) _verifyOtp();
-                      },
+                    textStyle: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF0A1128)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey.shade300, width: 1.5),
                     ),
-                  );
-                }),
+                  ),
+                  focusedPinTheme: PinTheme(
+                    width: 48,
+                    height: 56,
+                    textStyle: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF0A1128)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFFFC107), width: 2),
+                    ),
+                  ),
+                  onCompleted: (pin) {
+                    _verifyOtp();
+                  },
+                ),
               ),
 
               const SizedBox(height: 32),
